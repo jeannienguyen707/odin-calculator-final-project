@@ -3,8 +3,8 @@ let display = document.createElement("div")
 display.classList.add("showNums")
 base.append(display)
 
-let firstNum = 0
-let secondNum = 0
+let firstNum = ""
+let secondNum = ""
 let operation = -1
 
 // Numbers
@@ -40,68 +40,69 @@ for (let i = 0; i < 10; i++) {
     base.append(clear)
 
 
-//return value function
-// and checks value function
-function operate(){
-    switch(o){
-        case "+":
-            return firstNum + secondNum
-        case "-":
-            return firstNum - secondNum
-        case "*":
-            return firstNum * secondNum
-        case "/":
-            if (secondNum === 0){
-                console.log("No no no there!")
-            } else {
-                return firstNum / secondNum
-            }
-
-    }
-}
-
-// check values function
-
-/*
-operations only?  just change op
-1 num value
-operations?
-
-if  /0 vs /10
-
-store as a string and break it down? no ne
 
 
-*/
 function createButton(){
     let newNum = document.createElement("button")
     newNum.addEventListener("click", valueButton)
     return newNum
 }
+
 function valueButton(e){
-    let value = e.target.innerHTM
+    let value = e.target.innerHTML
     let displayText = display.textContent
 
     if (value == "clear"){
-        firstNum = 0
-        secondNum = 0
+        firstNum = ""
+        secondNum = ""
         operation = -1
         display.textContent = ""
         return
     }
-    
-     if (firstNum == 0 && isOperation(value)) {
-        return
+
+    if (value === "="){
+        console.log (firstNum)
+        console.log (secondNum)
+        console.log(operation)
+        let result = operate(operation)
+        console.log(result)
+        display.textContent = result
+        firstNum = result
+        operation = -1
+        secondNum = "" 
+        return 
     }
 
-    if (firstNum != 0 && isOperation(value)) {
-        firstNum = display.textContent
-        operation = value
+    if (operation == -1 && !isOperation(value)){
+        firstNum = displayText + value
+        display.textContent = displayText + value
     }
 
-    // display input
-    
-    display.textContent = displayText + value
+    else if (operation != -1 && !isOperation(value)) {
+        secondNum = secondNum + value
+        display.textContent = displayText + value 
+        
+    }
+
+    else if (isOperation(value)) {
+        if (secondNum == "") {// check properly
+            if (operation == -1) {
+                operation = value
+                display.textContent = displayText + value 
+            }  else {
+                display.textContent = displayText.replace(operation, value) 
+                operation = value
+            }
+            // doesn't change op display
+        
+        } else if (operation != -1){
+            let result = operate(operation)
+            display.textContent = result + operation
+            firstNum = result
+            operation = value
+        }
+
+    }
 }
 
 function isOperation(o){
@@ -109,4 +110,26 @@ function isOperation(o){
         return true
     }
     return false
+}
+
+//return value function
+// and checks value function
+function operate(operation){
+    console.log( firstNum)
+    console.log(secondNum)
+    switch(operation){
+        case "+":
+            return parseInt(firstNum) + parseInt(secondNum)
+        case "-":
+            return parseInt(firstNum) - parseInt(secondNum)
+        case "*":
+            return parseInt(firstNum) * parseInt(secondNum)
+        case "/":
+            if (secondNum === 0){
+                console.log("No no no there!")
+            } else {
+                return parseInt(firstNum) / parseInt(secondNum)
+            }
+
+    }
 }
