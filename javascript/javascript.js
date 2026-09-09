@@ -5,7 +5,7 @@ base.append(display)
 
 let firstNum = 0
 let secondNum = 0
-let operation
+let operation = -1
 
 // Numbers
 for (let i = 0; i < 10; i++) {
@@ -79,8 +79,34 @@ function createButton(){
     return newNum
 }
 function valueButton(e){
-    console.log(e.target.innerHTML)
+    let value = e.target.innerHTM
     let displayText = display.textContent
-    display.textContent = displayText + e.target.innerHTML
-    return e.target.innerHTML
+
+    if (value == "clear"){
+        firstNum = 0
+        secondNum = 0
+        operation = -1
+        display.textContent = ""
+        return
+    }
+    
+     if (firstNum == 0 && isOperation(value)) {
+        return
+    }
+
+    if (firstNum != 0 && isOperation(value)) {
+        firstNum = display.textContent
+        operation = value
+    }
+
+    // display input
+    
+    display.textContent = displayText + value
+}
+
+function isOperation(o){
+    if (o == "+" || o == "-" || o == "*" || o == "/" ) {
+        return true
+    }
+    return false
 }
