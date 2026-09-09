@@ -1,27 +1,64 @@
-const base = document.querySelector(".calBody")
-const display = document.createElement("div")
+let base = document.querySelector(".calBody")
+let display = document.createElement("div")
 display.classList.add("showNums")
-base.add(display)
+base.append(display)
 
-let score = 0
+let firstNum = 0
+let secondNum = 0
+let operation
 
 // Numbers
 for (let i = 0; i < 10; i++) {
-    let newNum = document.createElement("div")
-    newNum.addEventListener("click", )
-
+    let newNum =  createButton()
+    newNum.textContent = i
+    base.append(newNum)
 }
 // Operations
-for (let i = 0; i < 4; i++) {
-    
-}
-// equal and clear button
+    let plus = createButton()
+    plus.textContent = "+"
+    base.append(plus)
 
+    let minus = createButton()
+    minus.textContent = "-"
+    base.append(minus)
+
+    let muli = createButton()
+    muli.textContent = "*"
+    base.append(muli)
+
+    let div = createButton()
+    div.textContent = "/"
+    base.append(div)
+
+// equal and clear button
+    let equal = createButton()
+    equal.textContent = "="
+    base.append(equal)
+
+    let clear = createButton()
+    clear.textContent = "clear"
+    base.append(clear)
 
 
 //return value function
 // and checks value function
+function operate(){
+    switch(o){
+        case "+":
+            return firstNum + secondNum
+        case "-":
+            return firstNum - secondNum
+        case "*":
+            return firstNum * secondNum
+        case "/":
+            if (secondNum === 0){
+                console.log("No no no there!")
+            } else {
+                return firstNum / secondNum
+            }
 
+    }
+}
 
 // check values function
 
@@ -36,3 +73,14 @@ store as a string and break it down? no ne
 
 
 */
+function createButton(){
+    let newNum = document.createElement("button")
+    newNum.addEventListener("click", valueButton)
+    return newNum
+}
+function valueButton(e){
+    console.log(e.target.innerHTML)
+    let displayText = display.textContent
+    display.textContent = displayText + e.target.innerHTML
+    return e.target.innerHTML
+}
