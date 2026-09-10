@@ -148,6 +148,7 @@ function isOperation(o){
 
 
 function operate(operation){
+    // Removes unnesessary zeros (make into number * make into number).round to nearest 3rd place
     switch(operation){
         case "+":
             return parseFloat((parseFloat(firstNum) + parseFloat(secondNum)).toFixed(3))
