@@ -150,24 +150,17 @@ function isOperation(o){
 function operate(operation){
     switch(operation){
         case "+":
-            return parseInt(firstNum) + parseInt(secondNum)
+            return parseFloat((parseFloat(firstNum) + parseFloat(secondNum)).toFixed(3))
         case "-":
-            return parseInt(firstNum) - parseInt(secondNum)
+            return parseFloat((parseFloat(firstNum) - parseFloat(secondNum)).toFixed(3))
         case "*":
-            return parseInt(firstNum) * parseInt(secondNum)
+            return parseFloat((parseFloat(firstNum) * parseFloat(secondNum)).toFixed(3))
         case "/":
             if (secondNum == 0){
                 return "false"
             } else {
-                return parseInt(firstNum) / parseInt(secondNum)
+                return parseFloat((parseFloat(firstNum)/parseFloat(secondNum)).toFixed(3))
             }
 
     }
 }
-/*
-             console.log (firstNum)
-        console.log (secondNum)
-        console.log(operation)
-
-        Case decimals 
-*/
