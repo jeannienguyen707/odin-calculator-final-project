@@ -50,7 +50,14 @@ function createButton(){
 
 function valueButton(e){
     let value = e.target.innerHTML
+
+    if (display.textContent.includes( "No no no there!" )){
+        display.textContent = display.textContent.replace("No no no there!", "")
+    } else if(display.textContent.includes("Equation not whole, please try again")){
+        display.textContent = display.textContent.replace("Equation not whole, please try again", "")
+    }
     let displayText = display.textContent
+
 
     if (value == "clear"){
         firstNum = ""
@@ -60,13 +67,23 @@ function valueButton(e){
         return
     }
 
-    if (value === "="){
+    if (value == "="){
+        if (secondNum == ""){
+            display.textContent = "Equation not whole, please try again" 
+            firstNum = ""
+            operation = -1
+            return
+        }
+
         let result = operate(operation)
+        // divide by zero case
         if (result === "false"){
             display.textContent = "No no no there!" 
             firstNum = ""
+            secondNum = ""
+            operation = -1
+        
         } else {
-            console.log (result)
             display.textContent = result
             firstNum = result
         }
@@ -76,6 +93,7 @@ function valueButton(e){
         return 
     }
 
+    // get number for first and second number
     if (operation == -1 && !isOperation(value)){
         firstNum = displayText + value
         display.textContent = displayText + value
@@ -88,6 +106,11 @@ function valueButton(e){
     }
 
     else if (isOperation(value)) {
+        if (firstNum == ""){
+            return
+        }
+        //change previous operation or add operation
+        // before second num
         if (secondNum == "") {// check properly
             if (operation == -1) {
                 operation = value
@@ -96,14 +119,21 @@ function valueButton(e){
                 display.textContent = displayText.replace(operation, value) 
                 operation = value
             }
-            // doesn't change op display
-        
+
+        // calculate into new equation
         } else if (operation != -1){
-            let result = operate(operation)            
-            firstNum = result
-            secondNum = ""
-            operation = value
-            display.textContent = result + operation
+            let result = operate(operation)
+             if (result == "false"){
+                display.textContent = "No no no there!" 
+                firstNum = ""
+                secondNum = ""
+                operation = -1
+            } else {
+                firstNum = result
+                secondNum = ""
+                operation = value
+                display.textContent = result + operation
+             }
         }
 
     }
@@ -116,8 +146,7 @@ function isOperation(o){
     return false
 }
 
-//return value function
-// and checks value function
+
 function operate(operation){
     switch(operation){
         case "+":
@@ -139,4 +168,6 @@ function operate(operation){
              console.log (firstNum)
         console.log (secondNum)
         console.log(operation)
+
+        Case decimals 
 */
