@@ -61,13 +61,16 @@ function valueButton(e){
     }
 
     if (value === "="){
-        console.log (firstNum)
-        console.log (secondNum)
-        console.log(operation)
         let result = operate(operation)
-        console.log(result)
-        display.textContent = result
-        firstNum = result
+        if (result === "false"){
+            display.textContent = "No no no there!" 
+            firstNum = ""
+        } else {
+            console.log (result)
+            display.textContent = result
+            firstNum = result
+        }
+        
         operation = -1
         secondNum = "" 
         return 
@@ -96,11 +99,7 @@ function valueButton(e){
             // doesn't change op display
         
         } else if (operation != -1){
-             console.log (firstNum)
-        console.log (secondNum)
-        console.log(operation)
-            let result = operate(operation)
-            
+            let result = operate(operation)            
             firstNum = result
             secondNum = ""
             operation = value
@@ -120,8 +119,6 @@ function isOperation(o){
 //return value function
 // and checks value function
 function operate(operation){
-    console.log( firstNum)
-    console.log(secondNum)
     switch(operation){
         case "+":
             return parseInt(firstNum) + parseInt(secondNum)
@@ -130,11 +127,16 @@ function operate(operation){
         case "*":
             return parseInt(firstNum) * parseInt(secondNum)
         case "/":
-            if (secondNum === 0){
-                console.log("No no no there!")
+            if (secondNum == 0){
+                return "false"
             } else {
                 return parseInt(firstNum) / parseInt(secondNum)
             }
 
     }
 }
+/*
+             console.log (firstNum)
+        console.log (secondNum)
+        console.log(operation)
+*/
