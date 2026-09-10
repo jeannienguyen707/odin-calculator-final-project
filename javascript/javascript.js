@@ -96,10 +96,15 @@ function valueButton(e){
             // doesn't change op display
         
         } else if (operation != -1){
+             console.log (firstNum)
+        console.log (secondNum)
+        console.log(operation)
             let result = operate(operation)
-            display.textContent = result + operation
+            
             firstNum = result
+            secondNum = ""
             operation = value
+            display.textContent = result + operation
         }
 
     }
