@@ -1,3 +1,10 @@
+body{
+    display: flex;
+    min-height: 100%;
+    min-width: 100%;
+    justify-content: center;
+    align-items: center;
+}
 .calBody{
     height: 600x;
     width: 250px;
@@ -5,9 +12,12 @@
     flex-direction: column;
     
 }
+
 .showNums{
-    height: 80;
-    width:  200px;
+    display: flex;
+    overflow-wrap: break-word;
+    height: 36px;
+    max-width:  248px;
     background-color: aqua;
     border: solid 1px black;
 }
